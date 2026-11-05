@@ -5,21 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ERICK HACKER</title>
 <style>
-body{background:black;color:#00ff00;font-family:monospace;text-align:center;padding:40px 15px}
-h1{font-size:55px;text-shadow:0 0 20px #00ff00;margin:0}
-h2{margin-top:10px}
-.box{max-width:320px;margin:30px auto;text-align:left;font-size:18px;line-height:2}
+body{background:#000;color:#0f0;font-family:monospace;padding:20px;margin:0}
+#term{max-width:600px;margin:auto}
+h1{text-align:center;text-shadow:0 0 15px #0f0}
+input{background:#000;color:#0f0;border:none;outline:none;font-family:monospace;font-size:16px;width:70%}
+.line{margin:8px 0}
 </style>
 </head>
 <body>
-<h1>ERICK</h1>
-<h2>HACKER DE LUANDA 🇦🇴</h2>
-<div class="box">
-> Sistema invadido com sucesso...<br>
-> Localização: Luanda, Angola<br>
-> Status: ONLINE 24/7<br>
-> Missão: Dominar a Internet<br>
-> Link: erick-hacker.github.io
+<div id="term">
+<h1>ERICK HACKER</h1>
+<div id="out">
+<div class="line">> Sistema invadido... digite 'help'</div>
 </div>
+<div class="line">erick@luanda:~$ <input id="cmd" autofocus></div>
+</div>
+<script>
+const out=document.getElementById('out');
+const cmd=document.getElementById('cmd');
+const cmds={
+help:"Comandos: whoami, location, status, mission, clear",
+whoami:"ERICK - Hacker de Luanda 🇦🇴",
+location:"Luanda, Angola - África",
+status:"ONLINE 24/7 - Invadindo sistemas",
+mission:"Dominar a Internet",
+clear:""
+}
+cmd.addEventListener('keydown',e=>{
+ if(e.key==='Enter'){
+  let v=cmd.value.toLowerCase().trim();
+  let d=document.createElement('div');
+  d.className='line';
+  d.textContent='erick@luanda:~$ '+v;
+  out.appendChild(d);
+  if(v==='clear'){out.innerHTML='';}
+  else{
+   let r=document.createElement('div');
+   r.className='line';
+   r.textContent='> '+(cmds[v]||"Comando não encontrado. Digite 'help'");
+   out.appendChild(r);
+  }
+  cmd.value='';
+  window.scrollTo(0,document.body.scrollHeight);
+ }
+});
+</script>
 </body>
 </html>
