@@ -9,11 +9,11 @@
 body{background:#000;color:#00ff41;font-family:'Courier New',monospace;overflow:hidden;height:100vh}
 canvas{position:fixed;top:0;left:0;z-index:0}
 #terminal{position:relative;z-index:1;background:rgba(0,0,0,0.85);margin:10px;border:1px solid #00ff41;box-shadow:0 0 20px #00ff41;height:calc(100vh - 20px);display:flex;flex-direction:column;padding:15px}
-#output{flex:1;overflow-y:auto;white-space:pre-wrap;line-height:1.5}
+#output{flex:1;overflow-y:auto;white-space:pre-wrap;line-height:1.6}
 #input-line{display:flex;gap:8px;margin-top:10px}
 #prompt{color:#00ff41;white-space:nowrap}
 #cmd{flex:1;background:transparent;border:none;color:#00ff41;font-family:inherit;font-size:16px;outline:none}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#00ff41}
+a{color:#00ff41}
 </style>
 </head>
 <body>
@@ -22,8 +22,7 @@ canvas{position:fixed;top:0;left:0;z-index:0}
 <div id="output">ERICK HACKER OS v3.0 [Luanda - AO]
 Kernel: Matrix Mode ON
 
-Sistema invadido com sucesso...
-Digite 'help' para ver os comandos.
+Digite 'help' para comandos.
 
 </div>
 <div id="input-line">
@@ -32,52 +31,31 @@ Digite 'help' para ver os comandos.
 </div>
 </div>
 <script>
-// MATRIX EFFECT
 const c=document.getElementById('matrix'),ctx=c.getContext('2d');
 c.width=window.innerWidth;c.height=window.innerHeight;
-const chars="01ERICKHACKER".split(""),drops=[];
+const chars="01ERICK".split(""),drops=[];
 for(let i=0;i<c.width/14;i++)drops[i]=1;
-function draw(){ctx.fillStyle="rgba(0,0,0,0.05)";ctx.fillRect(0,0,c.width,c.height);ctx.fillStyle="#0f0";ctx.font="14px monospace";drops.forEach((y,i)=>{const t=chars[Math.floor(Math.random()*chars.length)];ctx.fillText(t,i*14,y*14);if(y*14>c.height&&Math.random()>0.975)drops[i]=0;drops[i]++});}
+function draw(){ctx.fillStyle="rgba(0,0,0,0.05)";ctx.fillRect(0,0,c.width,c.height);ctx.fillStyle="#00ff41";ctx.font="14px monospace";drops.forEach((y,i)=>{const t=chars[Math.floor(Math.random()*chars.length)];ctx.fillText(t,i*14,y*14);if(y*14>c.height&&Math.random()>0.975)drops[i]=0;drops[i]++});}
 setInterval(draw,35);
-
-// TERMINAL COMMANDS
 const out=document.getElementById('output'),input=document.getElementById('cmd');
 const cmds={
-help:`Comandos disponíveis:
-  whoami     - quem é o Erick
-  skills     - minhas habilidades
-  instagram  - abre meu insta
-  github     - abre meu github
-  hack       - modo invasão
-  matrix     - chuva matrix
-  clear      - limpa terminal
-  contact    - meu whatsapp`,
-whoami:`\n> ERICK HACKER\n> Local: Luanda, Angola\n> Dev Frontend | Hacker Criativo\n> "Transformo código em poder"\n`,
-skills:`\n[SKILLS]
-  [+] HTML/CSS/JS - 95%
-  [+] Termux/Git - 90%
-  [+] Design Hacker - 100%
-  [+] Criação de Sites - Nível Lendário\n`,
-contact:`\nWhatsApp: wa.me/244XXXXXXXXX\nGitHub: github.com/erick-hacker\nSite: erick-hacker.github.io\n`,
-instagram:`Abrindo Instagram...`,
-github:`Abrindo GitHub...`,
+help:`Comandos:
+  whoami    - quem sou
+  skills    - habilidades
+  hack      - invasão
+  clear     - limpar`,
+whoami:`\n> ERICK HACKER\n> Luanda, Angola\n> Dev Frontend & Hacker Criativo\n`,
+skills:`\n[SKILLS] HTML 95% | JS 90% | Termux 100%\n`,
 clear:``
 };
 input.addEventListener('keydown',e=>{
 if(e.key==='Enter'){
-const v=input.value.trim().toLowerCase();
-const p=document.createElement('div');
-p.textContent=`erick@luanda:~$ ${input.value}`;
-out.appendChild(p);
-let res="";
+const raw=input.value;const v=raw.trim().toLowerCase();
+const p=document.createElement('div');p.textContent=`erick@luanda:~$ ${raw}`;out.appendChild(p);
 if(v==='clear'){out.innerHTML="";input.value="";return;}
-else if(v==='hack'){
-res="\n[INICIANDO INVASÃO...]\n> Conectando a Luanda... OK\n> Bypass firewall... OK\n> Acesso root concedido!\n> Bem-vindo, Erick!\n"; 
-}
-else if(v==='instagram'){window.open('https://instagram.com/','_blank');res="\n> Instagram aberto em nova aba!\n";}
-else if(v==='github'){window.open('https://github.com/erick-hacker','_blank');res="\n> GitHub aberto!\n";}
-else if(v==='matrix'){res="\n> Matrix Mode: ATIVADO (olha o fundo)\n";}
-else{res=cmds[v]||`\nComando '${v}' não encontrado. Digite 'help'\n`;}
+let res="";
+if(v==='hack'){res="\n[INVADINDO...]\n> Conectando Luanda... OK\n> Firewall bypass... OK\n> Acesso ROOT concedido!\n";}
+else{res=cmds[v]||`\nComando '${v}' não existe. Digite 'help'\n`;}
 const d=document.createElement('div');d.textContent=res;out.appendChild(d);
 out.scrollTop=out.scrollHeight;input.value="";
 }
