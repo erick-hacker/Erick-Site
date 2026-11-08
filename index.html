@@ -3,77 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<title>ERICK AI</title>
+<title>ERICK AI V2</title>
 <style>
 body{background:#000;color:#0f0;font-family:monospace;margin:0;padding:10px}
-#chat{max-width:700px;margin:auto;border:2px solid #0f0;border-radius:10px;height:80vh;display:flex;flex-direction:column}
+#chat{max-width:700px;margin:auto;border:2px solid #0f0;border-radius:10px;height:85vh;display:flex;flex-direction:column}
 #msgs{flex:1;overflow-y:auto;padding:10px}
-.msg{margin:10px 0;padding:10px;border-radius:10px}
+.msg{margin:10px 0;padding:10px;border-radius:10px;word-wrap:break-word}
 .user{background:#003300;text-align:right}
 .ai{background:#001100;border:1px solid #0f0}
 #inputArea{display:flex;border-top:2px solid #0f0}
 input{flex:1;background:#000;color:#0f0;border:none;padding:15px;font-family:monospace;outline:none}
 button{background:#0f0;color:#000;border:none;padding:15px;font-weight:bold;cursor:pointer}
-h1{text-align:center;text-shadow:0 0 10px #0f0}
+h1{text-align:center;text-shadow:0 0 10px #0f0;font-size:22px}
+.loading{color:#888;font-style:italic}
 </style>
 </head>
 <body>
-<h1>🤖 ERICK AI - Pergunte Tudo</h1>
+<h1>🤖 ERICK AI V2 - Responde TUDO</h1>
 <div id="chat">
 <div id="msgs">
-<div class="msg ai">Fala Erick! Sou sua IA. Pergunte qualquer coisa: programação, hacker, matemática, vida... eu respondo!</div>
+<div class="msg ai">Fala Erick! Agora sou V2 com inteligência real! Pergunte qualquer coisa do mundo que eu respondo de verdade!</div>
 </div>
 <div id="inputArea">
-<input id="pergunta" placeholder="Digite sua pergunta aqui...">
+<input id="pergunta" placeholder="Pergunte qualquer coisa...">
 <button onclick="responder()">ENVIAR</button>
 </div>
 </div>
 <script>
-const conhecimento = {
-"quem é você":"Sou o ERICK AI, criado pelo Erick Hacker de Luanda!",
-"quem e o erick":"O Erick é um programador de Luanda que programa em Python no Termux e tem um site hacker!",
-"python":"Python é a melhor linguagem pra hacker! Você já usa no Termux. Quer um código?",
-"como hackear":"Estude: 1. Python 2. Linux 3. Redes. Você já começou! Seu scanner de portas já é hacking ético!",
-"o que é html":"HTML é o que você usa no seu site! <h1> <body> tudo em inglês",
-"matematica|conta|calcular":()=>{return "Manda a conta! Ex: 25*48 ou 100/4 que eu calculo na hora!";},
-"oi|ola|salve":"Salve Erick! Manda a braba, o que quer saber?",
-"obrigado|valeu":"Tamo junto! Criado por Erick Hacker 😎",
-"default":"Boa pergunta! Ainda tô aprendendo essa. Mas me pergunta sobre: Python, HTML, seu site, hacking ético, ou manda uma conta de matemática que eu resolvo!"
-};
-
-function responder(){
+async function responder(){
  let input=document.getElementById("pergunta");
  let txt=input.value.trim();
  if(!txt) return;
  addMsg(txt,"user");
  input.value="";
- let resp = gerarResposta(txt.toLowerCase());
- setTimeout(()=>addMsg(resp,"ai"),500);
-}
-
-function gerarResposta(txt){
- // calcula conta
- if(txt.match(/[0-9+\-*/()]+/)){
-  try{ let r=eval(txt); if(!isNaN(r)) return "Resultado: "+txt+" = <b>"+r+"</b> 🧮"; }catch(e){}
+ let loadingId = addMsg("Pensando... 🤔","ai loading");
+ try{
+  let res = await fetch("https://text.pollinations.ai/"+encodeURIComponent(txt));
+  let data = await res.text();
+  document.getElementById(loadingId).remove();
+  addMsg(data,"ai");
+ }catch(e){
+  document.getElementById(loadingId).remove();
+  addMsg("Erro na conexão, mas ainda sei: "+txt+" -> Sou o ERICK AI criado pelo Erick! Tenta de novo!","ai");
  }
- for(let k in conhecimento){
-  if(new RegExp(k).test(txt)){
-   let v=conhecimento[k];
-   return typeof v==="function"?v():v;
-  }
- }
- return conhecimento["default"] + "<br><br>Sua pergunta foi: <i>'"+txt+"'</i>";
 }
-
 function addMsg(t,c){
  let m=document.createElement("div");
+ let id="msg"+Date.now()+Math.random();
+ m.id=id;
  m.className="msg "+c;
  m.innerHTML=t;
  document.getElementById("msgs").appendChild(m);
  document.getElementById("msgs").scrollTop=99999;
+ return id;
 }
-
 document.getElementById("pergunta").addEventListener("keydown",e=>{if(e.key==="Enter")responder()});
 </script>
 </body>
-  </html>
+</html>
