@@ -1,34 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Hacker Erick</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>ERICK AI</title>
 <style>
-body{background:#000;color:#0f0;font-family:monospace;text-align:center;padding:20px}
-.box{border:2px solid #0f0;padding:20px;margin:20px;border-radius:10px}
-h1{color:#0f0;text-shadow:0 0 10px #0f0}
-a{color:#0ff;text-decoration:none}
+body{background:#000;color:#0f0;font-family:monospace;margin:0;padding:10px}
+#chat{max-width:700px;margin:auto;border:2px solid #0f0;border-radius:10px;height:80vh;display:flex;flex-direction:column}
+#msgs{flex:1;overflow-y:auto;padding:10px}
+.msg{margin:10px 0;padding:10px;border-radius:10px}
+.user{background:#003300;text-align:right}
+.ai{background:#001100;border:1px solid #0f0}
+#inputArea{display:flex;border-top:2px solid #0f0}
+input{flex:1;background:#000;color:#0f0;border:none;padding:15px;font-family:monospace;outline:none}
+button{background:#0f0;color:#000;border:none;padding:15px;font-weight:bold;cursor:pointer}
+h1{text-align:center;text-shadow:0 0 10px #0f0}
 </style>
 </head>
 <body>
-<h1>=== MENU HACKER DO ERICK ===</h1>
-<p>Programador Python | Termux Hacker</p>
-
-<div class="box">
-<h2>🔐 Meus Projetos</h2>
-<p>✅ Gerador de Senhas - Senha forte tipo 5EgW04k$Lw%V%oEh</p>
-<p>✅ Calculadora Hacker - Soma, menos e vezes</p>
-<p>✅ Scanner de Portas - Escaneia google.com</p>
+<h1>🤖 ERICK AI - Pergunte Tudo</h1>
+<div id="chat">
+<div id="msgs">
+<div class="msg ai">Fala Erick! Sou sua IA. Pergunte qualquer coisa: programação, hacker, matemática, vida... eu respondo!</div>
 </div>
-
-<div class="box">
-<h2>📱 Meu Menu</h2>
-<p>Rodo no Termux: <b>python menu.py</b></p>
-<p>3 ferramentas em 1 só programa!</p>
+<div id="inputArea">
+<input id="pergunta" placeholder="Digite sua pergunta aqui...">
+<button onclick="responder()">ENVIAR</button>
 </div>
-
-<div class="box">
-<p>Feito por Erick no Termux 💚</p>
-<p><a href="https://github.com/erick-hacker">Meu GitHub</a></p>
 </div>
+<script>
+const conhecimento = {
+"quem é você":"Sou o ERICK AI, criado pelo Erick Hacker de Luanda!",
+"quem e o erick":"O Erick é um programador de Luanda que programa em Python no Termux e tem um site hacker!",
+"python":"Python é a melhor linguagem pra hacker! Você já usa no Termux. Quer um código?",
+"como hackear":"Estude: 1. Python 2. Linux 3. Redes. Você já começou! Seu scanner de portas já é hacking ético!",
+"o que é html":"HTML é o que você usa no seu site! <h1> <body> tudo em inglês",
+"matematica|conta|calcular":()=>{return "Manda a conta! Ex: 25*48 ou 100/4 que eu calculo na hora!";},
+"oi|ola|salve":"Salve Erick! Manda a braba, o que quer saber?",
+"obrigado|valeu":"Tamo junto! Criado por Erick Hacker 😎",
+"default":"Boa pergunta! Ainda tô aprendendo essa. Mas me pergunta sobre: Python, HTML, seu site, hacking ético, ou manda uma conta de matemática que eu resolvo!"
+};
+
+function responder(){
+ let input=document.getElementById("pergunta");
+ let txt=input.value.trim();
+ if(!txt) return;
+ addMsg(txt,"user");
+ input.value="";
+ let resp = gerarResposta(txt.toLowerCase());
+ setTimeout(()=>addMsg(resp,"ai"),500);
+}
+
+function gerarResposta(txt){
+ // calcula conta
+ if(txt.match(/[0-9+\-*/()]+/)){
+  try{ let r=eval(txt); if(!isNaN(r)) return "Resultado: "+txt+" = <b>"+r+"</b> 🧮"; }catch(e){}
+ }
+ for(let k in conhecimento){
+  if(new RegExp(k).test(txt)){
+   let v=conhecimento[k];
+   return typeof v==="function"?v():v;
+  }
+ }
+ return conhecimento["default"] + "<br><br>Sua pergunta foi: <i>'"+txt+"'</i>";
+}
+
+function addMsg(t,c){
+ let m=document.createElement("div");
+ m.className="msg "+c;
+ m.innerHTML=t;
+ document.getElementById("msgs").appendChild(m);
+ document.getElementById("msgs").scrollTop=99999;
+}
+
+document.getElementById("pergunta").addEventListener("keydown",e=>{if(e.key==="Enter")responder()});
+</script>
 </body>
-</html>
+  </html>
