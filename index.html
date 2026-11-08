@@ -2,51 +2,45 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width">
 <title>ERICK HACKER</title>
 <style>
-body{background:#000;color:#0f0;font-family:monospace;padding:20px;margin:0}
-#term{max-width:600px;margin:auto}
-h1{text-align:center;text-shadow:0 0 15px #0f0}
-input{background:#000;color:#0f0;border:none;outline:none;font-family:monospace;font-size:16px;width:70%}
-.line{margin:8px 0}
+body{background:#000;color:#0f0;font-family:monospace;text-align:center}
+#prazo{max-width:600px;margin:auto}
+h1{text-align:center;text-shadow:0 0 10px #0f0}
+input{background:#000;color:#0f0;border:1px solid #0f0;padding:8px}
+.linha{margin:8px 0}
+.box{border:2px solid #0f0;padding:15px;margin:15px;border-radius:10px}
 </style>
 </head>
 <body>
-<div id="term">
+<div id="prazo">
 <h1>ERICK HACKER</h1>
-<div id="out">
-<div class="line">> Sistema invadido... digite 'help'</div>
+<div id="fora">
+<div class="linha">>> Sistema invadido... digite 'help'</div>
 </div>
-<div class="line">erick@luanda:~$ <input id="cmd" autofocus></div>
+<div class="linha">erick@luanda:~$ <input id="entrada"></div>
+
+<div class="box">
+<h2>🔐 Meus Projetos</h2>
+<p>✅ Gerador de Senhas</p>
+<p>✅ Calculadora Hacker</p>
+<p>✅ Scanner de Portas</p>
+</div>
+
 </div>
 <script>
-const out=document.getElementById('out');
-const cmd=document.getElementById('cmd');
-const cmds={
-help:"Comandos: whoami, location, status, mission, clear",
-whoami:"ERICK - Hacker de Luanda 🇦🇴",
-location:"Luanda, Angola - África",
-status:"ONLINE 24/7 - Invadindo sistemas",
-mission:"Dominar a Internet",
-clear:""
-}
-cmd.addEventListener('keydown',e=>{
- if(e.key==='Enter'){
-  let v=cmd.value.toLowerCase().trim();
-  let d=document.createElement('div');
-  d.className='line';
-  d.textContent='erick@luanda:~$ '+v;
-  out.appendChild(d);
-  if(v==='clear'){out.innerHTML='';}
-  else{
-   let r=document.createElement('div');
-   r.className='line';
-   r.textContent='> '+(cmds[v]||"Comando não encontrado. Digite 'help'");
-   out.appendChild(r);
-  }
-  cmd.value='';
-  window.scrollTo(0,document.body.scrollHeight);
+let cmds={"help":"comandos: quem sou, projetos, limpar","quem sou":"Sou o Erick, hacker de Luanda, programador Python no Termux!","projetos":"3 ferramentas no meu MENU HACKER","limpar":""};
+let fora=document.getElementById("fora");
+let entrada=document.getElementById("entrada");
+entrada.addEventListener("keydown",e=>{
+ if(e.key==="Enter"){
+  let c=entrada.value.toLowerCase().trim();
+  let div=document.createElement("div"); div.className="linha";
+  div.textContent="> "+entrada.value; fora.appendChild(div);
+  let resp=document.createElement("div"); resp.className="linha";
+  if(c==="limpar"){fora.innerHTML="";}else{resp.textContent=cmds[c]||"comando nao encontrado. digite help"; fora.appendChild(resp);}
+  entrada.value=""; window.scrollTo(0,document.body.scrollHeight);
  }
 });
 </script>
