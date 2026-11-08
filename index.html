@@ -1,1 +1,34 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><title>ERICK HACKER</title><style>body{background:#000;color:#0f0;font-family:monospace;text-align:center}#prazo{max-width:600px;margin:auto}h1{text-align:center;text-shadow:0 0 10px #0f0}input{background:#000;color:#0f0;border:1px solid #0f0;padding:8px}.linha{margin:8px 0}.caixa{border:2px solid #0f0;padding:15px;margin:15px;border-radius:10px}</style></head><body><div id="prazo"><h1>ERICK HACKER</h1><div id="fora"><div class="linha">>> Sistema invadido... digite 'help'</div></div><div class="linha">erick@luanda:~$ <input id="entrada"></div><div class="caixa"><h2>Meus Projetos</h2><p>Gerador de Senhas</p><p>Calculadora</p><p>Scanner</p></div></div><script>let cmds={"help":"comandos: quem sou, projetos, limpar","quem sou":"Sou o Erick, hacker de Luanda!","projetos":"3 ferramentas no MENU HACKER","limpar":""};let fora=document.getElementById("fora");let entrada=document.getElementById("entrada");entrada.addEventListener("keydown",e=>{if(e.key==="Enter"){let c=entrada.value.toLowerCase().trim();let d=document.createElement("div");d.className="linha";d.textContent="> "+entrada.value;fora.appendChild(d);let r=document.createElement("div");r.className="linha";if(c==="limpar"){fora.innerHTML="";}else{r.textContent=cmds[c]||"comando nao encontrado";fora.appendChild(r);}entrada.value="";}});</script></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hacker Erick</title>
+<style>
+body{background:#000;color:#0f0;font-family:monospace;text-align:center;padding:20px}
+.box{border:2px solid #0f0;padding:20px;margin:20px;border-radius:10px}
+h1{color:#0f0;text-shadow:0 0 10px #0f0}
+a{color:#0ff;text-decoration:none}
+</style>
+</head>
+<body>
+<h1>=== MENU HACKER DO ERICK ===</h1>
+<p>Programador Python | Termux Hacker</p>
+
+<div class="box">
+<h2>🔐 Meus Projetos</h2>
+<p>✅ Gerador de Senhas - Senha forte tipo 5EgW04k$Lw%V%oEh</p>
+<p>✅ Calculadora Hacker - Soma, menos e vezes</p>
+<p>✅ Scanner de Portas - Escaneia google.com</p>
+</div>
+
+<div class="box">
+<h2>📱 Meu Menu</h2>
+<p>Rodo no Termux: <b>python menu.py</b></p>
+<p>3 ferramentas em 1 só programa!</p>
+</div>
+
+<div class="box">
+<p>Feito por Erick no Termux 💚</p>
+<p><a href="https://github.com/erick-hacker">Meu GitHub</a></p>
+</div>
+</body>
+</html>
