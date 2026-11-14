@@ -6,20 +6,20 @@
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
-<title>ERICK - HACKER DO BEM - LVL 3</title>
+<title>ERICK - HACKER DO BEM - LVL 10</title>
 <style>
 body{background:#0a0a0a;color:#00ff00;font-family:monospace;padding:20px;max-width:800px;margin:auto}
 h1{color:#fff;font-size:32px;line-height:1.1}
 h2{color:#fff;border-bottom:1px solid #00ff00;padding-bottom:5px}
 .card{background:#111;border:1px solid #00ff00;padding:15px;border-radius:10px;margin:10px 0}
-a{color:#00ff00}
-input,button{padding:10px;width:100%;margin-top:10px;border-radius:8px;border:1px solid #00ff00;background:#000;color:#00ff00}
+input,button{padding:12px;width:100%;margin-top:10px;border-radius:8px;border:1px solid #00ff00;background:#000;color:#00ff00;box-sizing:border-box}
 button{background:#00ff00;color:#000;font-weight:bold}
-#chat{background:#000;border:1px solid #00ff00;padding:10px;height:200px;overflow-y:auto;border-radius:10px}
+#chat{background:#000;border:1px solid #00ff00;padding:12px;height:280px;overflow-y:auto;border-radius:10px}
+.chips button{width:auto;background:#111;color:#00ff00;padding:6px 10px;margin:5px 5px 0 0;font-size:12px}
 </style>
 </head>
 <body>
-<h1>ERICK<br>HACKER DO BEM<br>LVL 3</h1>
+<h1>ERICK<br>HACKER DO BEM<br>LVL 10</h1>
 <p>Luanda, Angola | Termux | Python | OSINT Global</p>
 <h2>🚀 Ferramentas Criadas</h2>
 <div class="card">
@@ -44,19 +44,50 @@ V7 FINAL ERICK MASTER TOOL - Todas Juntas!
 - B_Darwin - target analyzed<br>
 - 3x IP Tracking - Global Report
 </div>
-<h2>🤖 ERICK AI V2 - Responde TUDO</h2>
-<div id="chat">ERICK AI: Fala, chefe! O que queres saber hoje?</div>
-<input id="pergunta" placeholder="Escreve aqui...">
+<h2>🤖 ERICK AI V3 - Inteligente</h2>
+<div id="chat">ERICK AI: Fala, chefe! Sou a V3. Pergunta quem sou eu, as ferramentas, OSINT, IP ou skills.</div>
+<div class="chips">
+<button onclick="perguntaRapida('Quem é o Erick?')">Quem é o Erick?</button>
+<button onclick="perguntaRapida('Quais as ferramentas?')">Ferramentas</button>
+<button onclick="perguntaRapida('O que é OSINT?')">O que é OSINT?</button>
+<button onclick="perguntaRapida('Mostra os IPs')">IPs</button>
+</div>
+<input id="pergunta" placeholder="Escreve aqui... Ex: Quem é o Erick?">
 <button onclick="responder()">ENVIAR</button>
 <script>
+function perguntaRapida(t){document.getElementById('pergunta').value=t;responder();}
 function responder(){
-let p=document.getElementById('pergunta').value;
+let input=document.getElementById('pergunta');
+let p=input.value.trim();
+if(!p) return;
 let c=document.getElementById('chat');
+let q=p.toLowerCase();
+let r="";
+if(q.includes("quem")||q.includes("erick")||q.includes("tu")||q.includes("voce")||q.includes("você")){
+r="Sou o Erick, Hacker do Bem de Luanda, Angola. LVL 10. Trabalho com Termux, Python e OSINT Global. Criei 7 ferramentas sozinho no telemóvel, do zero!";
+}else if(q.includes("ferramenta")||q.includes("v2")||q.includes("v7")||q.includes("criou")||q.includes("projeto")){
+r="Minhas 7 ferramentas: V2 Scanner de Portas, V3 Scanner OSINT, V4 Painel ERICK, V5 Este Site, V6 Rastreador de IP Global, V7 MASTER TOOL - todas juntas!";
+}else if(q.includes("osint")){
+r="OSINT é Open Source Intelligence - investigar usando só informação pública: Instagram, IPs, domínios, etc. Eu faço isso de forma legal e ética, só para defesa e estudo. Nunca para invadir ninguém.";
+}else if(q.includes("ip")||q.includes("rastre")){
+r="IPs rastreados: Angola 102.214.36.7 - Luanda/Africell, USA 8.8.8.8 - Google, Austrália 1.1.1.1 - Cloudflare. Todos com geolocalização pública.";
+}else if(q.includes("skill")||q.includes("sabe")||q.includes("python")||q.includes("linux")){
+r="Minhas skills: Python, Linux/Termux, OSINT, HTML, Geolocalização, Port Scan, Git e GitHub Pages. Aprendi tudo no telemóvel, na prática.";
+}else if(q.includes("ola")||q.includes("olá")||q.includes("oi")||q.includes("bom dia")||q.includes("boa")){
+r="Olá chefe! Tudo fixe? Pergunta-me quem sou eu, as minhas ferramentas, o que é OSINT ou os IPs que rastreei.";
+}else if(q.includes("hack")||q.includes("invadir")||q.includes("senha")||q.includes("password")){
+r="Eu sou Hacker do BEM. Não ajudo a invadir, roubar senhas ou atacar ninguém. Posso ensinar-te a TE DEFENDERES, a fazer OSINT legal e a criares as tuas próprias ferramentas.";
+}else if(q.includes("site")||q.includes("github")){
+r="Este site foi feito em HTML, no Termux com nano, e publicado com Git + GitHub Pages. Resolvi conflito de Git e bug de CSP sozinho. É 100% meu código.";
+}else{
+r="Boa pergunta: '"+p+"'. Ainda estou a aprender sobre isso na V3. Por agora pergunta-me: quem é o Erick, ferramentas, OSINT, IPs ou skills - que eu respondo na hora!";
+}
 c.innerHTML+="<br><br>Tu: "+p;
-c.innerHTML+="<br>ERICK AI: Boa! Já estou a processar: '"+p+"'. Em breve vou ter resposta completa. Por agora, foca no teu LVL 3 - estás a evoluir rápido!";
-document.getElementById('pergunta').value="";
+c.innerHTML+="<br>ERICK AI: "+r;
+input.value="";
 c.scrollTop=c.scrollHeight;
 }
+document.getElementById('pergunta').addEventListener('keydown',function(e){if(e.key==='Enter') responder();});
 </script>
 </body>
 </html>
