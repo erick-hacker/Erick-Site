@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
 <title>ERICK - HACKER DO BEM - LVL 3</title>
 <style>
 body{background:#0a0a0a;color:#00ff00;font-family:monospace;padding:20px;max-width:800px;margin:auto}
@@ -21,7 +21,6 @@ button{background:#00ff00;color:#000;font-weight:bold}
 <body>
 <h1>ERICK<br>HACKER DO BEM<br>LVL 3</h1>
 <p>Luanda, Angola | Termux | Python | OSINT Global</p>
-
 <h2>🚀 Ferramentas Criadas</h2>
 <div class="card">
 V2 Scanner de Portas - Scan TCP<br>
@@ -31,29 +30,24 @@ V5 Este Site - No Ar com GitHub Pages<br>
 V6 Rastreador de IP Global<br>
 V7 FINAL ERICK MASTER TOOL - Todas Juntas!
 </div>
-
 <h2>🌍 IPs Rastreados</h2>
 <div class="card">
 🇦🇴 102.214.36.7 - Luanda / Africell<br>
 🇺🇸 8.8.8.8 - Ashburn, Virginia / Google<br>
 🇦🇺 1.1.1.1 - Brisbane / Cloudflare
 </div>
-
 <h2>💻 Skills</h2>
 <div class="card">Python | Linux (Termux) | OSINT | HTML | Geolocalização | Port Scan</div>
-
 <h2>📁 Relatórios OSINT</h2>
 <div class="card">
 - Instagram - instagram report<br>
 - B_Darwin - target analyzed<br>
 - 3x IP Tracking - Global Report
 </div>
-
 <h2>🤖 ERICK AI V2 - Responde TUDO</h2>
 <div id="chat">ERICK AI: Fala, chefe! O que queres saber hoje?</div>
 <input id="pergunta" placeholder="Escreve aqui...">
 <button onclick="responder()">ENVIAR</button>
-
 <script>
 function responder(){
 let p=document.getElementById('pergunta').value;
